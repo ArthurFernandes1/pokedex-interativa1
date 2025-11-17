@@ -1,42 +1,33 @@
-import React from "react";
+import { typeColors } from "../utils/typeColors";
 
 export function PokemonCard({ pokemon }) {
-  if (!pokemon) return null;
+  const mainType = pokemon.types[0].type.name;
+  const bgColor = typeColors[mainType] || "#777";
 
   return (
-    <div style={styles.card}>
+    <div
+      className="shadow-lg rounded-2xl p-6 w-80 text-white"
+      style={{ backgroundColor: bgColor }}
+    >
+      <h2 className="text-3xl font-bold text-center capitalize mb-4 drop-shadow-lg">
+        {pokemon.name}
+      </h2>
+
       <img
-        src={pokemon.sprites?.front_default}
+        src={pokemon.sprites.other["official-artwork"].front_default}
         alt={pokemon.name}
-        style={styles.image}
+        className="mx-auto w-40 h-40 drop-shadow-xl"
       />
-      <h3 style={styles.name}>{pokemon.name.toUpperCase()}</h3>
-      <p style={styles.type}>
-        Tipo: {pokemon.types?.map((t) => t.type.name).join(", ")}
-      </p>
+
+      <div className="mt-4 text-lg">
+        <p><strong>ID:</strong> {pokemon.id}</p>
+        <p>
+          <strong>Tipo(s):</strong>  
+          {pokemon.types.map(t => t.type.name).join(", ")}
+        </p>
+        <p><strong>Altura:</strong> {pokemon.height / 10} m</p>
+        <p><strong>Peso:</strong> {pokemon.weight / 10} kg</p>
+      </div>
     </div>
   );
 }
-
-const styles = {
-  card: {
-    backgroundColor: "#f5f5f5",
-    borderRadius: "12px",
-    padding: "16px",
-    textAlign: "center",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-    width: "180px",
-  },
-  image: {
-    width: "120px",
-    height: "120px",
-  },
-  name: {
-    margin: "8px 0 4px",
-    fontSize: "1.2rem",
-  },
-  type: {
-    margin: 0,
-    color: "#555",
-  },
-};
