@@ -1,33 +1,22 @@
-import { typeColors } from "../utils/typeColors";
+import { Link } from "react-router-dom";
 
 export function PokemonCard({ pokemon }) {
-  const mainType = pokemon.types[0].type.name;
-  const bgColor = typeColors[mainType] || "#777";
-
   return (
-    <div
-      className="shadow-lg rounded-2xl p-6 w-80 text-white"
-      style={{ backgroundColor: bgColor }}
+    <Link
+      to={`/pokemon/${pokemon.id}`}
+      className="block w-full max-w-xs mx-auto"
     >
-      <h2 className="text-3xl font-bold text-center capitalize mb-4 drop-shadow-lg">
-        {pokemon.name}
-      </h2>
+      <div className="bg-white shadow-lg rounded-xl p-4 hover:scale-105 transition cursor-pointer border">
+        <h3 className="text-xl font-bold text-center capitalize">
+          {pokemon.name}
+        </h3>
 
-      <img
-        src={pokemon.sprites.other["official-artwork"].front_default}
-        alt={pokemon.name}
-        className="mx-auto w-40 h-40 drop-shadow-xl"
-      />
-
-      <div className="mt-4 text-lg">
-        <p><strong>ID:</strong> {pokemon.id}</p>
-        <p>
-          <strong>Tipo(s):</strong>  
-          {pokemon.types.map(t => t.type.name).join(", ")}
-        </p>
-        <p><strong>Altura:</strong> {pokemon.height / 10} m</p>
-        <p><strong>Peso:</strong> {pokemon.weight / 10} kg</p>
+        <img
+          src={pokemon.sprites.front_default}
+          alt={pokemon.name}
+          className="w-32 mx-auto"
+        />
       </div>
-    </div>
+    </Link>
   );
 }

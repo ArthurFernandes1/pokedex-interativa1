@@ -1,23 +1,9 @@
-import React from "react";
-
 export function Header() {
   return (
-    <header style={styles.header}>
-      <h1 style={styles.title}>PokéDex Interativa 🔥</h1>
+    <header className="w-full bg-red-600 p-4 shadow-lg">
+      <h1 className="text-3xl md:text-4xl font-bold text-white text-center">
+        Pokédex Interativa
+      </h1>
     </header>
   );
 }
-
-const styles = {
-  header: {
-    backgroundColor: "#ef5350",
-    color: "white",
-    padding: "16px",
-    textAlign: "center",
-    boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-  },
-  title: {
-    margin: 0,
-    fontSize: "1.8rem",
-  },
-};
