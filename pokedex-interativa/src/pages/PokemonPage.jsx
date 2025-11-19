@@ -3,20 +3,20 @@ import { useParams, Link } from "react-router-dom";
 import { getPokemon } from "../api/pokeapi";
 
 export default function PokemonPage() {
-  const { id } = useParams();
+  const { name } = useParams();
   const [pokemon, setPokemon] = useState(null);
 
   useEffect(() => {
     async function load() {
       try {
-        const data = await getPokemon(id);
+        const data = await getPokemon(name);
         setPokemon(data);
       } catch {
         setPokemon(null);
       }
     }
     load();
-  }, [id]);
+  }, [name]);
 
   if (!pokemon) {
     return (
