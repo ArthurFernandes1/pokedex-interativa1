@@ -20,25 +20,21 @@ export default function PokemonPage() {
 
   if (!pokemon) {
     return (
-      <div className="text-center text-xl mt-20">
-        Carregando Pokémon...
-      </div>
+      <div className="text-center text-xl mt-20">Carregando Pokémon...</div>
     );
   }
 
   return (
     <div className="max-w-xl mx-auto p-6">
-
       {/* Botão voltar */}
       <Link
         to="/"
-        className="inline-block mb-4 text-red-600 font-bold hover:underline"
+        className="fixed top-4 left-4 bg-red-600 text-white px-3 py-2 rounded-lg shadow hover:bg-red-700"
       >
-        ⬅ Voltar
+        ⬅ Início
       </Link>
 
       <div className="bg-white shadow-xl rounded-xl p-6 border">
-
         <h1 className="text-3xl font-bold capitalize text-center mb-4">
           {pokemon.name} #{pokemon.id}
         </h1>
@@ -63,8 +59,12 @@ export default function PokemonPage() {
         </div>
 
         <div className="flex justify-around text-lg">
-          <p><b>Altura:</b> {pokemon.height / 10} m</p>
-          <p><b>Peso:</b> {pokemon.weight / 10} kg</p>
+          <p>
+            <b>Altura:</b> {pokemon.height / 10} m
+          </p>
+          <p>
+            <b>Peso:</b> {pokemon.weight / 10} kg
+          </p>
         </div>
 
         <h2 className="text-2xl font-semibold mt-6 mb-2">Status Base</h2>

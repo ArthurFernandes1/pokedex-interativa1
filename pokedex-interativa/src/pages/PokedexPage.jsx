@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // <-- ADICIONADO
-import { getAllPokemon } from "../api/pokeapi";
+import { Link } from "react-router-dom";
+import { getPokemonPage } from "../api/pokeapi";
 import { PokemonCard } from "../components/PokemonCard";
 
 export default function PokedexPage() {
   const [pokemonList, setPokemonList] = useState([]);
+  const [page, setPage] = useState(0); // página atual
+  const limit = 30;
 
   useEffect(() => {
-    async function loadData() {
-      const data = await getAllPokemon(30); // carrega primeiros 30 pokémon
+    async function load() {
+      const data = await getPokemonPage(limit, page * limit);
       setPokemonList(data);
     }
-    loadData();
-  }, []);
+    load();
+  }, [page]);
 
   return (
     <div className="p-6">
 
-      {/* BOTÃO VOLTAR */}
+      {/* Voltar */}
       <Link
         to="/"
-        className="fixed top-4 left-4 bg-red-600 text-white px-3 py-2 rounded-lg shadow hover:bg-red-700"
+        className="fixed top-4 left-4 bg-red-600 text-white px-3 py-2 rounded-lg shadow hover:bg-red-700 z-50"
       >
         ⬅ Voltar para o Início
       </Link>
@@ -29,10 +31,29 @@ export default function PokedexPage() {
         Pokédex Completa
       </h1>
 
+      {/* Listagem */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {pokemonList.map((p) => (
           <PokemonCard pokemon={p} key={p.id} />
         ))}
+      </div>
+
+      {/* Paginação */}
+      <div className="flex justify-center gap-6 mt-6">
+        <button
+          onClick={() => setPage((p) => Math.max(p - 1, 0))}
+          className="px-4 py-2 bg-red-500 text-white rounded-md disabled:opacity-50"
+          disabled={page === 0}
+        >
+          ⬅ Anterior
+        </button>
+
+        <button
+          onClick={() => setPage((p) => p + 1)}
+          className="px-4 py-2 bg-red-500 text-white rounded-md"
+        >
+          Próxima ➝
+        </button>
       </div>
     </div>
   );

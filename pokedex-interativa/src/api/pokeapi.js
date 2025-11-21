@@ -18,20 +18,19 @@ export async function getPokemon(nameOrId) {
   return response.data;
 }
 
-export async function getAllPokemon(limit = 20) {
-  const response = await axios.get(
-    `https://pokeapi.co/api/v2/pokemon?limit=${limit}`
-  );
-
+// Nova função para pegar Pokémon com offset (paginação)
+export async function getPokemonPage(limit = 30, offset = 0) {
+  const response = await api.get(`/pokemon?limit=${limit}&offset=${offset}`);
   const results = response.data.results;
 
-  // busca os detalhes de cada Pokémon
-  const detailedPokemon = await Promise.all(
-    results.map(async (pokemon) => {
-      const res = await axios.get(pokemon.url);
-      return res.data;
+  // Buscar dados completos de cada Pokémon
+  const pokemonData = await Promise.all(
+    results.map(async (p) => {
+      const details = await api.get(p.url);
+      return details.data;
     })
   );
 
-  return detailedPokemon;
+  return pokemonData;
 }
+
