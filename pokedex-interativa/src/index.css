@@ -1,1 +1,11 @@
 @import "tailwindcss";
+.pokemon-card-3d:hover {
+  transform: rotateX(6deg) rotateY(-6deg) scale(1.05);
+}
+.pokemon-title {
+  font-family: 'Pokemon Solid', sans-serif;
+  color: #FFCB05; /* amarelo Pokémon */
+  -webkit-text-stroke: 3px #2A75BB; /* contorno azul Pokémon */
+  text-shadow: 2px 2px 0 #2A75BB;
+  letter-spacing: 2px;
+}

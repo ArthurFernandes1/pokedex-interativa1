@@ -3,20 +3,28 @@ import { Link } from "react-router-dom";
 export function PokemonCard({ pokemon }) {
   return (
     <Link
-      to={`/pokemon/${pokemon.id}`}
-      className="block w-full max-w-xs mx-auto"
+      to={`/pokemon/${pokemon.name}`}
+      className="pokemon-card-3d
+        bg-white rounded-xl shadow-lg border
+        p-4 text-center transform transition-all duration-300
+        hover:scale-105 hover:shadow-2xl hover:-rotate-1
+      "
+      style={{
+        background: "linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%)",
+      }}
     >
-      <div className="bg-white shadow-lg rounded-xl p-4 hover:scale-105 transition cursor-pointer border">
-        <h3 className="text-xl font-bold text-center capitalize">
-          {pokemon.name}
-        </h3>
+      <img
+        src={pokemon.sprites.other["official-artwork"].front_default}
+        alt={pokemon.name}
+        className="w-28 mx-auto mb-4 drop-shadow-lg transition-all duration-300 hover:scale-110"
+      />
 
-        <img
-          src={pokemon.sprites.front_default}
-          alt={pokemon.name}
-          className="w-32 mx-auto"
-        />
-      </div>
+      <h2 className="capitalize text-xl font-bold text-gray-800">
+        {pokemon.name}
+      </h2>
+
+      <p className="text-gray-500 text-sm">#{pokemon.id}</p>
     </Link>
   );
 }
+
